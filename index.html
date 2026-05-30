@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>TrAfrikaAffiliates</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --green:#0B6E4F;--green-dark:#085038;--green-light:#e6f4ef;
+    --gold:#F4B400;--gold-dark:#c49000;
+    --blue:#1E88E5;
+    --text:#111;--text2:#444;--text3:#777;
+    --bg:#f8f7f4;--white:#fff;
+    --border:#e2e2de;
+    --radius:12px;--radius-lg:20px;
+  }
+  body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+
+  /* NAV */
+  nav{background:var(--green-dark);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:60px;position:sticky;top:0;z-index:100}
+  .logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.2rem;color:var(--gold);letter-spacing:-0.02em}
+  .logo span{color:#fff}
+  .nav-links{display:flex;gap:1.5rem;list-style:none}
+  .nav-links a{color:rgba(255,255,255,0.8);text-decoration:none;font-size:0.85rem;font-weight:500;transition:color 0.2s}
+  .nav-links a:hover{color:var(--gold)}
+  .nav-cta{background:var(--gold);color:#111;font-weight:600;font-size:0.85rem;padding:0.45rem 1.1rem;border-radius:8px;text-decoration:none;transition:background 0.2s}
+  .nav-cta:hover{background:var(--gold-dark)}
+
+  /* HERO */
+  .hero{background:linear-gradient(135deg,var(--green-dark) 0%,var(--green) 60%,#0e8060 100%);position:relative;overflow:hidden}
+  .hero::before{content:'';position:absolute;right:-60px;top:-80px;width:400px;height:400px;background:rgba(244,180,0,0.08);border-radius:50%}
+  .hero::after{content:'';position:absolute;left:30%;bottom:-100px;width:300px;height:300px;background:rgba(255,255,255,0.04);border-radius:50%}
+  .hero-inner{margin:0 auto;text-align:center;position:relative;z-index:1}
+  .hero-badge{display:inline-flex;align-items:center;gap:0.4rem;background:rgba(244,180,0,0.18);color:var(--gold);font-size:0.78rem;font-weight:600;padding:0.35rem 0.9rem;border-radius:20px;margin-bottom:1.2rem;border:1px solid rgba(244,180,0,0.3);letter-spacing:0.04em;text-transform:uppercase}
+  .hero h1{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(2rem,5vw,3.2rem);color:#fff;line-height:1.12;margin-bottom:1rem;letter-spacing:-0.03em}
+  .hero h1 em{color:var(--gold);font-style:normal}
+  .hero p{color:rgba(255,255,255,0.75);font-size:1.05rem;max-width:560px;margin:0 auto 2rem;line-height:1.65}
+  .hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+  .btn-primary{background:var(--gold);color:#111;font-weight:700;font-size:0.95rem;padding:0.8rem 1.8rem;border-radius:10px;text-decoration:none;transition:transform 0.15s,background 0.2s;border:none;cursor:pointer}
+  .btn-primary:hover{transform:translateY(-2px);background:var(--gold-dark)}
+  .btn-outline{background:transparent;color:#fff;font-weight:600;font-size:0.95rem;padding:0.8rem 1.8rem;border-radius:10px;text-decoration:none;border:1.5px solid rgba(255,255,255,0.4);transition:transform 0.15s,border-color 0.2s;cursor:pointer}
+  .btn-outline:hover{transform:translateY(-2px);border-color:rgba(255,255,255,0.8)}
+
+  /* HERO STATS */
+  .hero-stats{display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;margin-top:2.5rem;padding-top:2rem;border-top:1px solid rgba(255,255,255,0.12)}
+  .stat{text-align:center}
+  .stat-n{font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;color:#fff}
+  .stat-l{font-size:0.78rem;color:rgba(255,255,255,0.55);margin-top:0.1rem}
+
+  /* SECTION */
+  .section{padding:3rem 2rem;max-width:1250px;margin:0 auto}
+  .section-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:1.8rem;flex-wrap:wrap;gap:1rem}
+  .section-title{font-family:'Syne',sans-serif;font-weight:700;font-size:1.4rem;letter-spacing:-0.02em}
+  .section-title span{color:var(--green)}
+  .see-all{color:var(--green);font-size:0.85rem;font-weight:600;text-decoration:none}
+  .see-all:hover{text-decoration:underline}
+
+  /* SPORTSBOOK CARDS */
+  .books-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem}
+  .book-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.2rem 1.3rem;display:flex;flex-direction:column;gap:0.9rem;transition:box-shadow 0.2s,transform 0.2s}
+  .book-card:hover{box-shadow:0 6px 24px rgba(0,0,0,0.08);transform:translateY(-2px)}
+  .book-header{display:flex;align-items:center;gap:0.9rem}
+  .book-logo{width:48px;height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:0.85rem;color:#fff;flex-shrink:0}
+  .book-name{font-weight:700;font-size:1rem}
+  .book-sub{font-size:0.78rem;color:var(--text3);margin-top:1px}
+  .rating{display:flex;align-items:center;gap:0.3rem}
+  .stars{color:var(--gold);font-size:0.85rem;letter-spacing:1px}
+  .rating-n{font-size:0.82rem;font-weight:600;color:var(--text2)}
+  .book-bonus{background:var(--green-light);border-radius:8px;padding:0.6rem 0.8rem;font-size:0.82rem;color:var(--green-dark);font-weight:600}
+  .book-bonus strong{display:block;font-size:1rem;color:var(--green)}
+  .book-tags{display:flex;gap:0.4rem;flex-wrap:wrap}
+  .tag{background:#f2f2ef;color:var(--text2);font-size:0.72rem;padding:0.25rem 0.6rem;border-radius:6px;font-weight:500}
+  .book-cta{background:var(--green);color:#fff;text-align:center;padding:0.7rem;border-radius:9px;font-weight:700;font-size:0.88rem;text-decoration:none;display:block;transition:background 0.2s}
+  .book-cta:hover{background:var(--green-dark)}
+  .featured-badge{display:inline-flex;align-items:center;gap:4px;background:#FFF8E1;color:#8a6000;font-size:0.7rem;font-weight:700;padding:3px 8px;border-radius:5px;border:1px solid #f4d35e;text-transform:uppercase;letter-spacing:0.04em}
+
+  /* COUNTRY PILLS */
+  .countries{display:flex;gap:0.7rem;flex-wrap:wrap;margin-bottom:2rem}
+  .country-pill{display:flex;align-items:center;gap:0.5rem;background:var(--white);border:1px solid var(--border);border-radius:50px;padding:0.5rem 1rem;font-size:0.85rem;font-weight:500;cursor:pointer;transition:all 0.15s;text-decoration:none;color:var(--text)}
+  .country-pill:hover,.country-pill.active{background:var(--green);border-color:var(--green);color:#fff}
+  .country-flag{font-size:1.1rem}
+
+  /* BONUS TABLE */
+  .bonus-table{width:100%;border-collapse:collapse;background:var(--white);border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--border)}
+  .bonus-table th{background:var(--green-dark);color:rgba(255,255,255,0.85);font-size:0.78rem;font-weight:600;padding:0.75rem 1rem;text-align:left;letter-spacing:0.04em;text-transform:uppercase}
+  .bonus-table td{padding:0.9rem 1rem;border-bottom:1px solid var(--border);font-size:0.88rem;vertical-align:middle}
+  .bonus-table tr:last-child td{border-bottom:none}
+  .bonus-table tr:hover td{background:#fafaf8}
+  .bonus-amount{font-weight:700;color:var(--green);font-size:1rem}
+  .claim-btn{background:var(--gold);color:#111;font-weight:700;font-size:0.78rem;padding:0.45rem 1rem;border-radius:7px;text-decoration:none;display:inline-block;transition:background 0.2s}
+  .claim-btn:hover{background:var(--gold-dark)}
+
+  /* PAYMENT */
+  .payment-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:0.8rem}
+  .payment-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:1rem;text-align:center;cursor:pointer;transition:all 0.15s}
+  .payment-card:hover{border-color:var(--green);transform:translateY(-1px)}
+  .payment-icon{font-size:2rem;margin-bottom:0.5rem}
+  .payment-name{font-size:0.8rem;font-weight:600;color:var(--text2)}
+  .payment-tag{font-size:0.7rem;color:var(--green);margin-top:2px}
+
+  /* TRUST BAR */
+  .trust-bar{background:var(--green-dark);padding:1.5rem 2rem}
+  .trust-inner{max-width:1100px;margin:0 auto;display:flex;gap:2rem;align-items:center;flex-wrap:wrap;justify-content:center}
+  .trust-item{display:flex;align-items:center;gap:0.6rem;color:rgba(255,255,255,0.8);font-size:0.85rem}
+  .trust-icon{background:rgba(244,180,0,0.2);width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+
+  /* RESPONSIBLE */
+  .responsible{background:#FFF8E1;border:1px solid #f4d35e;border-radius:var(--radius-lg);padding:1.5rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+  .responsible-icon{font-size:2rem}
+  .responsible p{font-size:0.85rem;color:#6a5000;line-height:1.6}
+  .responsible p strong{color:#4a3500}
+
+  /* FOOTER */
+  footer{background:var(--green-dark);color:rgba(255,255,255,0.6);padding:2rem;font-size:0.8rem;text-align:center;margin-top:2rem}
+  footer a{color:rgba(255,255,255,0.5);text-decoration:none}
+  footer a:hover{color:var(--gold)}
+  .footer-links{display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap;margin-bottom:0.8rem}
+
+  @media(max-width:600px){
+    .nav-links{display:none}
+    .hero-stats{gap:1.2rem}
+    .section{padding:2rem 1rem}
+    .books-grid{grid-template-columns:1fr}
+    .bonus-table{font-size:0.8rem}
+    .bonus-table th,.bonus-table td{padding:0.6rem 0.7rem}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav style="padding-top:40px;padding-bottom: 40px;">
+  <div class="logo">TrAfrika<span>Affiliates</span></div>
+  <ul class="nav-links">
+    <li><a href="#">Betting Sites</a></li>
+    <li><a href="#">Bonuses</a></li>
+    <li><a href="#">Reviews</a></li>
+    <li><a href="#">Countries</a></li>
+    <li><a href="#">Payments</a></li>
+  </ul>
+  <a class="nav-cta" href="#">Compare Sites ↗</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" style="background-image: url('bcgimg.png');background-size:cover">
+  <div class="hero-inner" style="background-color: rgba(0,0,0,0.6);width: 100%;height: 100%;padding: 100px 0px;">
+    <div class="hero-badge">⚽ Africa's #1 Betting Affiliate</div>
+    <h1>Compare Africa's <em>Best Betting Sites</em></h1>
+    <p>Find the best bonuses, fastest payouts, and top-rated sportsbooks across Kenya, Nigeria, South Africa, Ghana & more.</p>
+    <div class="hero-btns">
+      <a class="btn-primary" href="#">Compare Betting Sites</a>
+      <a class="btn-outline" href="#">Claim Best Bonus</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-n">50+</div><div class="stat-l">Sportsbooks Reviewed</div></div>
+      <div class="stat"><div class="stat-n">8</div><div class="stat-l">African Countries</div></div>
+      <div class="stat"><div class="stat-n">100%</div><div class="stat-l">Independent Reviews</div></div>
+      <div class="stat"><div class="stat-n">24/7</div><div class="stat-l">Updated Bonuses</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- COUNTRIES -->
+<div style="background:var(--white);border-bottom:1px solid var(--border);padding:1rem 2rem;overflow-x:auto">
+  <div style="display:flex;gap:0.7rem;max-width:1100px;margin:0 auto;flex-wrap:wrap">
+    <a class="country-pill active" href="#"><span class="country-flag">🌍</span> All Africa</a>
+    <a class="country-pill" href="#"><span class="country-flag">🇰🇪</span> Kenya</a>
+    <a class="country-pill" href="#"><span class="country-flag">🇳🇬</span> Nigeria</a>
+    <a class="country-pill" href="#"><span class="country-flag">🇿🇦</span> South Africa</a>
+    <a class="country-pill" href="#"><span class="country-flag">🇬🇭</span> Ghana</a>
+    <a class="country-pill" href="#"><span class="country-flag">🇺🇬</span> Uganda</a>
+    <a class="country-pill" href="#"><span class="country-flag">🇹🇿</span> Tanzania</a>
+  </div>
+</div>
+
+<!-- TOP RATED SPORTSBOOKS -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-title">Top Rated <span>Betting Sites</span></div>
+    <a class="see-all" href="#">View all 50+ sites →</a>
+  </div>
+  <div class="books-grid">
+
+    <!-- Betway -->
+    <div class="book-card">
+      <div class="book-header">
+        <div class="book-logo" style="background:#00497a">BW</div>
+        <div>
+          <div class="book-name">Betway</div>
+          <div class="book-sub">🇰🇪 🇳🇬 🇿🇦 🇬🇭</div>
+        </div>
+        <div class="featured-badge" style="margin-left:auto">⭐ Editor's Pick</div>
+      </div>
+      <div class="rating"><span class="stars">★★★★★</span><span class="rating-n">4.9 / 5.0</span></div>
+      <div class="book-bonus"><strong>KES 5,000 Welcome Bonus</strong>100% match on first deposit</div>
+      <div class="book-tags"><span class="tag">M-Pesa</span><span class="tag">Live Betting</span><span class="tag">Fast Payouts</span></div>
+      <a class="book-cta" href="#">Claim Bonus →</a>
+    </div>
+
+    <!-- SportPesa -->
+    <div class="book-card">
+      <div class="book-header">
+        <div class="book-logo" style="background:#e60023">SP</div>
+        <div>
+          <div class="book-name">SportPesa</div>
+          <div class="book-sub">🇰🇪 🇹🇿 🇺🇬</div>
+        </div>
+      </div>
+      <div class="rating"><span class="stars">★★★★★</span><span class="rating-n">4.8 / 5.0</span></div>
+      <div class="book-bonus"><strong>KES 2,000 Free Bet</strong>No deposit required</div>
+      <div class="book-tags"><span class="tag">M-Pesa</span><span class="tag">Jackpots</span><span class="tag">Best Odds</span></div>
+      <a class="book-cta" href="#">Claim Bonus →</a>
+    </div>
+
+    <!-- 1xBet -->
+    <div class="book-card">
+      <div class="book-header">
+        <div class="book-logo" style="background:#034694">1X</div>
+        <div>
+          <div class="book-name">1xBet</div>
+          <div class="book-sub">🇰🇪 🇳🇬 🇬🇭 🇿🇦</div>
+        </div>
+      </div>
+      <div class="rating"><span class="stars">★★★★☆</span><span class="rating-n">4.6 / 5.0</span></div>
+      <div class="book-bonus"><strong>Up to KES 15,000 Bonus</strong>130% first deposit match</div>
+      <div class="book-tags"><span class="tag">Airtel Money</span><span class="tag">Casino</span><span class="tag">Virtual Sports</span></div>
+      <a class="book-cta" href="#">Claim Bonus →</a>
+    </div>
+
+    <!-- MozzartBet -->
+    <div class="book-card">
+      <div class="book-header">
+        <div class="book-logo" style="background:#c0392b">MZ</div>
+        <div>
+          <div class="book-name">MozzartBet</div>
+          <div class="book-sub">🇰🇪 🇳🇬 🇿🇦</div>
+        </div>
+      </div>
+      <div class="rating"><span class="stars">★★★★☆</span><span class="rating-n">4.5 / 5.0</span></div>
+      <div class="book-bonus"><strong>KES 3,000 Bonus</strong>Deposit & get 100% match</div>
+      <div class="book-tags"><span class="tag">M-Pesa</span><span class="tag">Live Stream</span><span class="tag">High Odds</span></div>
+      <a class="book-cta" href="#">Claim Bonus →</a>
+    </div>
+
+    <!-- Hollywoodbets -->
+    <div class="book-card">
+      <div class="book-header">
+        <div class="book-logo" style="background:#ff0050">HB</div>
+        <div>
+          <div class="book-name">Hollywoodbets</div>
+          <div class="book-sub">🇿🇦 🇰🇪 🇺🇬</div>
+        </div>
+      </div>
+      <div class="rating"><span class="stars">★★★★☆</span><span class="rating-n">4.4 / 5.0</span></div>
+      <div class="book-bonus"><strong>R25 Free Bet</strong>No deposit needed</div>
+      <div class="book-tags"><span class="tag">Visa</span><span class="tag">Horse Racing</span><span class="tag">Slots</span></div>
+      <a class="book-cta" href="#">Claim Bonus →</a>
+    </div>
+
+    <!-- Betika -->
+    <div class="book-card">
+      <div class="book-header">
+        <div class="book-logo" style="background:#0B6E4F">BT</div>
+        <div>
+          <div class="book-name">Betika</div>
+          <div class="book-sub">🇰🇪</div>
+        </div>
+      </div>
+      <div class="rating"><span class="stars">★★★★☆</span><span class="rating-n">4.3 / 5.0</span></div>
+      <div class="book-bonus"><strong>KES 1,000 Free Bet</strong>On first deposit</div>
+      <div class="book-tags"><span class="tag">M-Pesa</span><span class="tag">Kenya Local</span><span class="tag">Jackpots</span></div>
+      <a class="book-cta" href="#">Claim Bonus →</a>
+    </div>
+
+
+    <!-- Bet888 -->
+<div class="book-card">
+  <div class="book-header">
+    <div class="book-logo" style="background:#ff9900">B8</div>
+    <div>
+      <div class="book-name">Bet888</div>
+      <div class="book-sub">🌍 International Sportsbook</div>
+    </div>
+    <!-- <div class="featured-badge" style="margin-left:auto">🔥 Popular</div> -->
+  </div>
+  <div class="rating">
+    <span class="stars">★★★★★</span>
+    <span class="rating-n">4.7 / 5.0</span>
+  </div>
+  <div class="book-bonus">
+    <strong>100% Welcome Bonus</strong>
+    Bonus on your first deposit
+  </div>
+  <div class="book-tags">
+    <span class="tag">Live Betting</span>
+    <span class="tag">Fast Withdrawals</span>
+  </div>
+  <a class="book-cta" href="#">Claim Bonus →</a>
+</div>
+
+<!-- Unibet -->
+<div class="book-card">
+  <div class="book-header">
+    <div class="book-logo" style="background:#009f3c">UB</div>
+    <div>
+      <div class="book-name">Unibet</div>
+      <div class="book-sub">🇬🇧 🇸🇪 🇩🇰 🇳🇴</div>
+    </div>
+  </div>
+  <div class="rating">
+    <span class="stars">★★★★★</span>
+    <span class="rating-n">4.8 / 5.0</span>
+  </div>
+  <div class="book-bonus">
+    <strong>Up to €100 Welcome Offer</strong>
+    Enhanced odds & free bets for new users
+  </div>
+  <div class="book-tags">
+    <span class="tag">Live Streaming</span>
+    <span class="tag">Cash Out</span>
+    <span class="tag">Top Odds</span>
+  </div>
+  <a class="book-cta" href="#">Claim Bonus →</a>
+</div>
+
+  </div>
+</div>
+
+<!-- BONUS TABLE -->
+<div class="section" style="padding-top:0">
+  <div class="section-header">
+    <div class="section-title">Best <span>Welcome Bonuses</span></div>
+    <a class="see-all" href="#">All bonuses →</a>
+  </div>
+  <div style="overflow-x:auto">
+  <table class="bonus-table">
+    <thead>
+      <tr>
+        <th>Sportsbook</th>
+        <th>Bonus Offer</th>
+        <th>Wagering</th>
+        <th>Countries</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Betway</strong></td>
+        <td><span class="bonus-amount">KES 5,000</span> — 100% match</td>
+        <td>3x rollover</td>
+        <td>KE · NG · ZA</td>
+        <td><a class="claim-btn" href="#">Claim</a></td>
+      </tr>
+      <tr>
+        <td><strong>1xBet</strong></td>
+        <td><span class="bonus-amount">KES 15,000</span> — 130% match</td>
+        <td>5x rollover</td>
+        <td>KE · NG · GH</td>
+        <td><a class="claim-btn" href="#">Claim</a></td>
+      </tr>
+      <tr>
+        <td><strong>SportPesa</strong></td>
+        <td><span class="bonus-amount">KES 2,000</span> Free Bet</td>
+        <td>1x rollover</td>
+        <td>KE · TZ · UG</td>
+        <td><a class="claim-btn" href="#">Claim</a></td>
+      </tr>
+      <tr>
+        <td><strong>Betwinner</strong></td>
+        <td><span class="bonus-amount">KES 8,000</span> — 100% match</td>
+        <td>3x rollover</td>
+        <td>KE · NG · ZA</td>
+        <td><a class="claim-btn" href="#">Claim</a></td>
+      </tr>
+      <tr>
+        <td><strong>MozzartBet</strong></td>
+        <td><span class="bonus-amount">KES 3,000</span> — 100% match</td>
+        <td>4x rollover</td>
+        <td>KE · NG</td>
+        <td><a class="claim-btn" href="#">Claim</a></td>
+      </tr>
+      <tr>
+        <td><strong>Hollywoodbets</strong></td>
+        <td><span class="bonus-amount">R25</span> — No Deposit</td>
+        <td>No wagering</td>
+        <td>ZA · KE · UG</td>
+        <td><a class="claim-btn" href="#">Claim</a></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<!-- PAYMENT METHODS -->
+<div style="background:var(--white);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:2.5rem 2rem">
+  <div style="max-width:1100px;margin:0 auto">
+    <div class="section-header" style="margin-bottom:1.5rem">
+      <div class="section-title">Popular <span>Payment Methods</span></div>
+    </div>
+    <div class="payment-grid">
+      <div class="payment-card"><div class="payment-icon">📱</div><div class="payment-name">M-Pesa</div><div class="payment-tag">Instant</div></div>
+      <div class="payment-card"><div class="payment-icon">📱</div><div class="payment-name">Airtel Money</div><div class="payment-tag">Instant</div></div>
+      <div class="payment-card"><div class="payment-icon">📱</div><div class="payment-name">MTN MoMo</div><div class="payment-tag">Instant</div></div>
+      <div class="payment-card"><div class="payment-icon">💳</div><div class="payment-name">Visa</div><div class="payment-tag">1–2 days</div></div>
+      <div class="payment-card"><div class="payment-icon">💳</div><div class="payment-name">Mastercard</div><div class="payment-tag">1–2 days</div></div>
+      <div class="payment-card"><div class="payment-icon">🌐</div><div class="payment-name">PayPal</div><div class="payment-tag">1 day</div></div>
+      <div class="payment-card"><div class="payment-icon">🔵</div><div class="payment-name">Skrill</div><div class="payment-tag">Instant</div></div>
+      <div class="payment-card"><div class="payment-icon">🟠</div><div class="payment-name">Neteller</div><div class="payment-tag">Instant</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-inner">
+    <div class="trust-item"><div class="trust-icon">🛡️</div>Only Licensed Sportsbooks</div>
+    <div class="trust-item"><div class="trust-icon">🔍</div>Independent Expert Reviews</div>
+    <div class="trust-item"><div class="trust-icon">⚡</div>Daily Updated Bonuses</div>
+    <div class="trust-item"><div class="trust-icon">🌍</div>8 African Countries</div>
+    <div class="trust-item"><div class="trust-icon">💬</div>Verified User Ratings</div>
+  </div>
+</div>
+
+<!-- RESPONSIBLE GAMBLING -->
+<div class="section" style="padding-top:2rem;padding-bottom:2rem">
+  <div class="responsible">
+    <div class="responsible-icon">⚠️</div>
+    <div>
+      <p><strong>Responsible Gambling:</strong> Gambling should be fun. Only bet what you can afford to lose. If you feel gambling is affecting you negatively, seek help. Resources: <a href="#" style="color:var(--green);font-weight:600">BeGambleAware</a> · <a href="#" style="color:var(--green);font-weight:600">GamCare</a>. TrAfrikaAffiliates is an affiliate site and does not operate gambling services. 18+ only.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-links">
+    <a href="#">About Us</a>
+    <a href="#">How We Review</a>
+    <a href="#">Affiliate Disclosure</a>
+    <a href="#">Privacy Policy</a>
+    <a href="#">Terms & Conditions</a>
+    <a href="#">Contact</a>
+    <a href="#">Responsible Gambling</a>
+  </div>
+  <p style="margin-bottom:0.5rem">© 2025 TrAfrikaAffiliates.com — Africa's Trusted Betting Affiliate Platform</p>
+  <p style="color:rgba(255,255,255,0.35);font-size:0.72rem">This site contains affiliate links. We may receive commissions when you click through and place bets. All bonuses subject to T&Cs. 18+ only. Gambling can be addictive — please play responsibly.</p>
+</footer>
+
+<script>
+  document.querySelectorAll('.country-pill').forEach(pill=>{
+    pill.addEventListener('click',function(e){
+      e.preventDefault();
+      document.querySelectorAll('.country-pill').forEach(p=>p.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>
